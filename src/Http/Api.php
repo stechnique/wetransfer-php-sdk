@@ -84,11 +84,17 @@ class Api
     public static function request($method, $endpoint, $params = null)
     {
         self::requireHttpClient();
-
-        $response = self::$http->request($method, self::API_BASE_URL . $endpoint, [
+        
+        $request = self::$http->createRequest($method, self::API_BASE_URL . $endpoint, [
             'headers' => self::defaultHeaders(),
             'json' => $params
         ]);
+        $response = self::$http->send($request);
+        
+        /*$response = self::$http->request($method, self::API_BASE_URL . $endpoint, [
+            'headers' => self::defaultHeaders(),
+            'json' => $params
+        ]);*/
 
         return json_decode($response->getBody(), true);
     }
@@ -104,10 +110,12 @@ class Api
     public static function upload($uploadUrl, $data)
     {
         self::requireHttpClient();
-
-        $response = self::$http->request('PUT', $uploadUrl, [
+        
+        $request = self::$http->createRequest('PUT', $uploadUrl, ['body' => $data]);
+        $response = self::$http->send($request);
+        /*$response = self::$http->request('PUT', $uploadUrl, [
             'body' => $data
-        ]);
+        ]);*/
 
         return json_decode($response->getBody(), true);
     }
