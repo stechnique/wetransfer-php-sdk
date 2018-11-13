@@ -9,7 +9,7 @@
     "sdk",
     "api"
   ],
-  "homepage": "https://github.com/arkaitzgarro/wetransfer-php-sdk",
+  "homepage": "https://github.com/stechnique/wetransfer-php-sdk",
   "license": "MIT",
   "authors": [
     {
